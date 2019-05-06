@@ -1,0 +1,104 @@
+///////       1
+
+function del(arr, n = 0) {
+    debugger;
+    if (n == arr.length - 1) { arr.pop(); return arr };
+    arr[n] = arr[n + 1];
+    return del(arr, n + 1);
+}
+
+let arr = ["a", "b", "c", "d", "e", "f", "g", "h"]
+console.log(del(arr));
+
+
+////////////      2
+
+function onearr(arr) {
+    if (arr.length === 0) return [];
+    const firstDigit = arr.shift();
+    if (Array.isArray(firstDigit) && firstDigit.length != 0) {
+        return [...onearr(firstDigit), ...onearr(arr)];
+    }
+    else {
+        return [firstDigit, ...onearr(arr)];
+    }
+}
+
+let arr = [-2, 1, [10, [3000, 22, [9000, 66], [33], 5000], 1000, 20], -3];
+console.log(onearr(arr));
+
+// ///////////      3
+ 
+ 
+function onenumber(mynum) {
+
+    if (mynum < 10) { return mynum; }
+    let newnum = 0;
+    while (mynum) {
+        newnum += mynum % 10;
+        mynum = Math.floor(mynum / 10);
+    }
+    return onenumber(newnum);
+}
+console.log(onenumber(999999999999));
+
+ /////////////     4
+
+
+function rotate(arr, n) {
+    debugger;
+    if (!n) return arr;
+    if (n > 0) {
+        let temp = arr.shift();
+        arr.push(temp);
+        return rotate(arr, n - 1);
+    }
+    if (n < 0) {
+        var removed = arr.pop();
+        arr.unshift(removed);
+        return rotate(arr, n + 1);
+    }
+}
+let arr = ["a", "b", "c", "d", "e", "f", "g", "h"]
+console.log(rotate(arr, -2));
+
+///////////       5
+
+function objrotate(obj) {
+    let temp = {};
+    for (let key in obj) {
+        if (temp.hasOwnProperty(obj[key])) {
+
+            temp[obj[key]] = [...temp[obj[key]], key];
+        }
+        else {
+            temp[obj[key]] = key;
+        }
+    }
+    return temp;
+}
+let obj = { a: "1", b: "2", c: "2", d: "2" }
+console.log(objrotate(obj));
+
+//////////////////////////////// 6
+
+function read(arr) {
+
+    const temp = arr.filter(x => x.readStatus == true);
+    return temp.sort(function (a, b) {
+        return a.percent - b.percent;
+    });
+}
+let arr = [
+    { book: "Catcher in the Rye;", readStatus: true, percent: 40 },
+    { book: "Animal Farm", readStatus: true, percent: 20 },
+    { book: "Solaris", readStatus: false, percent: 90 },
+    { book: " The Falt", readStatus: true, percent: 50 },
+    { book: "White Nights", readStatus: false, percent: 60 },
+    { book: "After Dark", readStatus: true, percent: 70 }
+];
+
+console.log(read(arr))
+
+
+ 
